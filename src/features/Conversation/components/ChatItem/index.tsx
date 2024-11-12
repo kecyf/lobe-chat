@@ -1,7 +1,7 @@
 import { ChatItem } from '@lobehub/ui';
 import { createStyles } from 'antd-style';
 import isEqual from 'fast-deep-equal';
-import { ReactNode, memo, useCallback } from 'react';
+import { ReactNode, memo, useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useAgentStore } from '@/store/agent';
@@ -16,9 +16,18 @@ import { ChatMessage } from '@/types/message';
 
 import ErrorMessageExtra, { useErrorContent } from '../../Error';
 import { renderMessagesExtra } from '../../Extras';
-import { renderBelowMessages, renderMessages, useAvatarsClick } from '../../Messages';
+import {
+  markdownCustomRenders,
+  renderBelowMessages,
+  renderMessages,
+  useAvatarsClick,
+} from '../../Messages';
+import History from '../History';
+import { markdownElements } from '../MarkdownElements';
 import ActionsBar from './ActionsBar';
-import HistoryDivider from './HistoryDivider';
+import { processWithArtifact } from './utils';
+
+const rehypePlugins = markdownElements.map((element) => element.rehypePlugin);
 
 const useStyles = createStyles(({ css, prefixCls }) => ({
   loading: css`
@@ -52,10 +61,8 @@ const Item = memo<ChatListItemProps>(({ index, id }) => {
 
     if (index >= chats.length) return;
 
-    return chatSelectors.currentChatsWithGuideMessage(meta)(s)[index];
+    return chats[index];
   }, isEqual);
-
-  const historyLength = useChatStore((s) => chatSelectors.currentChats(s).length);
 
   const [
     isMessageLoading,
@@ -104,7 +111,7 @@ const Item = memo<ChatListItemProps>(({ index, id }) => {
 
   const MessageExtra = useCallback(
     ({ data }: { data: ChatMessage }) => {
-      if (!renderMessagesExtra || !item?.role) return;
+      if (!item?.role) return;
       let RenderFunction;
       if (renderMessagesExtra?.[item.role]) RenderFunction = renderMessagesExtra[item.role];
 
@@ -113,21 +120,53 @@ const Item = memo<ChatListItemProps>(({ index, id }) => {
     },
     [item?.role],
   );
+
+  const markdownCustomRender = useCallback(
+    (dom: ReactNode, { text }: { text: string }) => {
+      if (!item?.role) return dom;
+      let RenderFunction;
+
+      if (renderMessagesExtra?.[item.role]) RenderFunction = markdownCustomRenders[item.role];
+      if (!RenderFunction) return dom;
+
+      return <RenderFunction displayMode={type} dom={dom} id={id} text={text} />;
+    },
+    [item?.role, type],
+  );
+
   const error = useErrorContent(item?.error);
+
+  const historyLength = useChatStore((s) => chatSelectors.currentChats(s).length);
 
   const enableHistoryDivider = useAgentStore((s) => {
     const config = agentSelectors.currentAgentChatConfig(s);
     return (
       config.enableHistoryCount &&
       historyLength > (config.historyCount ?? 0) &&
-      config.historyCount === historyLength - index + 1
+      config.historyCount === historyLength - index
     );
   });
+
+  // remove line breaks in artifact tag to make the ast transform easier
+  const message =
+    !editing && item?.role === 'assistant' ? processWithArtifact(item?.content) : item?.content;
+
+  const components = useMemo(
+    () =>
+      Object.fromEntries(
+        markdownElements.map((element) => {
+          const Component = element.Component;
+
+          return [element.tag, (props: any) => <Component {...props} id={id} />];
+        }),
+      ),
+    [id],
+  );
 
   return (
     item && (
       <>
-        <HistoryDivider enable={enableHistoryDivider} />
+        {enableHistoryDivider && <History  />}
         <ChatItem
           actions={
             <ActionsBar
@@ -145,7 +184,12 @@ const Item = memo<ChatListItemProps>(({ index, id }) => {
           errorMessage={<ErrorMessageExtra data={item} />}
           fontSize={fontSize}
           loading={isProcessing}
-          message={item.content}
+          markdownProps={{
+            components,
+            customRender: markdownCustomRender,
+            rehypePlugins,
+          }}
+          message={message}
           messageExtra={<MessageExtra data={item} />}
           onAvatarClick={onAvatarsClick?.(item.role)}
           onChange={(value) => updateMessageContent(item.id, value)}

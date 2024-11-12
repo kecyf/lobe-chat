@@ -9,7 +9,7 @@
       "title": "Witaj w {{name}}"
     }
   },
-  "appInitializing": "Inicjowanie aplikacji, prosimy o cierpliwość...",
+  "appInitializing": "Aplikacja uruchamia się...",
   "autoGenerate": "Automatyczne generowanie",
   "autoGenerateTooltip": "Automatyczne uzupełnianie opisu asystenta na podstawie sugestii",
   "autoGenerateTooltipDisabled": "Proszę wprowadzić słowo kluczowe przed użyciem funkcji automatycznego uzupełniania",
@@ -112,6 +112,7 @@
     "en": "Angielski",
     "en-US": "Angielski (USA)",
     "es-ES": "Hiszpański",
+    "fa-IR": "perski",
     "fi-FI": "Fiński",
     "fr-FR": "Francuski",
     "hi-IN": "Hindi",
@@ -195,8 +196,8 @@
   },
   "tab": {
     "chat": "Czat",
+    "discover": "Odkryj",
     "files": "Pliki",
-    "market": "Odkrywaj",
     "me": "ja",
     "setting": "Ustawienia"
   },

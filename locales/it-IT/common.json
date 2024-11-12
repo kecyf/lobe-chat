@@ -9,7 +9,7 @@
       "title": "Benvenuto a {{name}}"
     }
   },
-  "appInitializing": "Inizializzazione dell'app in corso, attendere pazientemente...",
+  "appInitializing": "Applicazione in fase di avvio...",
   "autoGenerate": "Generazione automatica",
   "autoGenerateTooltip": "Completamento automatico basato su suggerimenti",
   "autoGenerateTooltipDisabled": "Si prega di compilare il campo suggerimento per abilitare la funzione di completamento automatico",
@@ -112,6 +112,7 @@
     "en": "Inglese",
     "en-US": "Inglese",
     "es-ES": "Spagnolo",
+    "fa-IR": "persiano",
     "fi-FI": "Finlandese",
     "fr-FR": "Francese",
     "hi-IN": "Hindi",
@@ -195,8 +196,8 @@
   },
   "tab": {
     "chat": "Chat",
+    "discover": "Scopri",
     "files": "File",
-    "market": "Scopri",
     "me": "io",
     "setting": "Impostazioni"
   },

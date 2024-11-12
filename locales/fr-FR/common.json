@@ -9,7 +9,7 @@
       "title": "Bienvenue à {{name}}"
     }
   },
-  "appInitializing": "L'application est en cours de démarrage, veuillez patienter...",
+  "appInitializing": "L'application est en cours de démarrage...",
   "autoGenerate": "Générer automatiquement",
   "autoGenerateTooltip": "Générer automatiquement la description de l'agent basée sur les suggestions",
   "autoGenerateTooltipDisabled": "Veuillez saisir un mot-clé avant d'activer la fonction de complétion automatique",
@@ -112,6 +112,7 @@
     "en": "Anglais",
     "en-US": "Anglais",
     "es-ES": "Espagnol",
+    "fa-IR": "persan",
     "fi-FI": "Finnois",
     "fr-FR": "français",
     "hi-IN": "Hindi",
@@ -195,8 +196,8 @@
   },
   "tab": {
     "chat": "Conversation",
+    "discover": "Découvrir",
     "files": "Fichiers",
-    "market": "Découvrir",
     "me": "moi",
     "setting": "Paramètre"
   },

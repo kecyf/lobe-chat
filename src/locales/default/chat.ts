@@ -6,8 +6,17 @@ export default {
     '你好，我是 **{{name}}**，你可以立即与我开始对话，也可以前往 [助手设置]({{url}}) 完善我的信息。',
   agentDefaultMessageWithSystemRole: '你好，我是 **{{name}}**，{{systemRole}}，让我们开始对话吧！',
   agentDefaultMessageWithoutEdit: '你好，我是 **{{name}}**，让我们开始对话吧！',
-  agentsAndConversations: '助手与会话',
+  agents: '助手',
+  artifact: {
+    generating: '生成中',
+    thinking: '思考中',
+    thought: '思考过程',
+    unknownTitle: '未命名作品',
+  },
   backToBottom: '跳转至当前',
+  chatList: {
+    longMessageDetail: '查看详情',
+  },
   clearCurrentMessages: '清空当前会话消息',
   confirmClearCurrentMessages: '即将清空当前会话消息，清空后将无法找回，请确认你的操作',
   confirmRemoveSessionItemAlert: '即将删除该助手，删除后该将无法找回，请确认你的操作',
@@ -42,7 +51,7 @@ export default {
     allFiles: '所有文件',
     allKnowledgeBases: '所有知识库',
     disabled:
-      '当前部署模式不支持知识库对话，如需使用，请切换到服务端数据库部署或使用 LobeChat Cloud 服务',
+      '当前部署模式不支持知识库对话，如需使用，请切换到服务端数据库部署或使用 {{cloud}} 服务',
     library: {
       action: {
         add: '添加',
@@ -74,7 +83,7 @@ export default {
   },
   regenerate: '重新生成',
   roleAndArchive: '角色与记录',
-  searchAgentPlaceholder: '搜索助手和对话...',
+  searchAgentPlaceholder: '搜索助手...',
   sendPlaceholder: '输入聊天内容...',
   sessionGroup: {
     config: '分组管理',
@@ -93,14 +102,20 @@ export default {
     tooLong: '分组名称长度需在 1-20 之内',
   },
   shareModal: {
+    copy: '复制',
     download: '下载截图',
+    downloadFile: '下载文件',
+    exportTitle: '默认标题',
     imageType: '图片格式',
+    includeTool: '包含插件消息',
+    includeUser: '包含用户消息',
     screenshot: '截图',
     settings: '导出设置',
-    shareToShareGPT: '生成 ShareGPT 分享链接',
+    text: '文本',
     withBackground: '包含背景图片',
     withFooter: '包含页脚',
     withPluginInfo: '包含插件信息',
+    withRole: '包含消息角色',
     withSystemRole: '包含助手角色设定',
   },
   stt: {
@@ -108,9 +123,9 @@ export default {
     loading: '识别中...',
     prettifying: '润色中...',
   },
-  temp: '临时',
   tokenDetails: {
     chats: '会话消息',
+    historySummary: '历史总结',
     rest: '剩余可用',
     systemRole: '角色设定',
     title: '上下文明细',
@@ -124,29 +139,10 @@ export default {
     used: '使用',
   },
   topic: {
-    actions: {
-      autoRename: '智能重命名',
-      duplicate: '创建副本',
-      export: '导出话题',
-    },
     checkOpenNewTopic: '是否开启新话题?',
     checkSaveCurrentMessages: '是否保存当前会话为话题?',
-    confirmRemoveAll: '即将删除全部话题，删除后将不可恢复，请谨慎操作。',
-    confirmRemoveTopic: '即将删除该话题，删除后将不可恢复，请谨慎操作。',
-    confirmRemoveUnstarred: '即将删除未收藏话题，删除后将不可恢复，请谨慎操作。',
-    defaultTitle: '默认话题',
-    duplicateLoading: '话题复制中...',
-    duplicateSuccess: '话题复制成功',
-    guide: {
-      desc: '点击发送左侧按钮可将当前会话保存为历史话题，并开启新一轮会话',
-      title: '话题列表',
-    },
     openNewTopic: '开启新话题',
-    removeAll: '删除全部话题',
-    removeUnstarred: '删除未收藏话题',
     saveCurrentMessages: '将当前会话保存为话题',
-    searchPlaceholder: '搜索话题...',
-    title: '话题',
   },
   translate: {
     action: '翻译',
@@ -157,6 +153,7 @@ export default {
     clear: '删除语音',
   },
   updateAgent: '更新助理信息',
+
   upload: {
     action: {
       fileUpload: '上传文件',
@@ -178,4 +175,5 @@ export default {
       },
     },
   },
+  zenMode: '专注模式',
 };
